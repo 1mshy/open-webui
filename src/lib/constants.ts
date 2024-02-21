@@ -16,6 +16,7 @@ export const REQUIRED_OLLAMA_VERSION = '0.1.16';
 export const SUPPORTED_FILE_TYPE = [
 	'application/epub+zip',
 	'application/pdf',
+	'application/json',
 	'text/plain',
 	'text/csv',
 	'text/xml',

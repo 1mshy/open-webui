@@ -32,6 +32,7 @@ REQUEST_POOL = []
 
 @app.get("/url")
 async def get_ollama_api_url(user=Depends(get_admin_user)):
+    print(app.state.OLLAMA_API_BASE_URL)
     return {"OLLAMA_API_BASE_URL": app.state.OLLAMA_API_BASE_URL}
 
 
@@ -62,18 +63,18 @@ async def proxy(path: str, request: Request, user=Depends(get_current_user)):
     body = await request.body()
     headers = dict(request.headers)
 
-    if user.role in ["user", "admin"]:
-        if path in ["pull", "delete", "push", "copy", "create"]:
-            if user.role != "admin":
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
-                )
-    else:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
-        )
+    # if user.role in ["user", "admin"]:
+    #     if path in ["pull", "delete", "push", "copy", "create"]:
+    #         if user.role != "admin":
+    #             raise HTTPException(
+    #                 status_code=status.HTTP_401_UNAUTHORIZED,
+    #                 detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
+    #             )
+    # else:
+    #     raise HTTPException(
+    #         status_code=status.HTTP_401_UNAUTHORIZED,
+    #         detail=ERROR_MESSAGES.ACCESS_PROHIBITED,
+    #     )
 
     headers.pop("host", None)
     headers.pop("authorization", None)
