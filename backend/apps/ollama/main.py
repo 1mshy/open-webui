@@ -62,7 +62,7 @@ async def proxy(path: str, request: Request, user=Depends(get_current_user)):
 
     body = await request.body()
     headers = dict(request.headers)
-
+    # CHANGED
     # if user.role in ["user", "admin"]:
     #     if path in ["pull", "delete", "push", "copy", "create"]:
     #         if user.role != "admin":

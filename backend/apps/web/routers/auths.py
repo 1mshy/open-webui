@@ -124,10 +124,11 @@ async def signin(request: Request, form_data: SigninForm):
 
 @router.post("/signup", response_model=SigninResponse)
 async def signup(request: Request, form_data: SignupForm):
-    if not request.app.state.ENABLE_SIGNUP:
-        raise HTTPException(
-            status.HTTP_403_FORBIDDEN, detail=ERROR_MESSAGES.ACCESS_PROHIBITED
-        )
+    # CHANGED
+    # if not request.app.state.ENABLE_SIGNUP:
+    #     raise HTTPException(
+    #         status.HTTP_403_FORBIDDEN, detail=ERROR_MESSAGES.ACCESS_PROHIBITED
+    #     )
 
     if not validate_email_format(form_data.email.lower()):
         raise HTTPException(
